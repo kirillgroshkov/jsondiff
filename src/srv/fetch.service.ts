@@ -1,5 +1,5 @@
 export class FetchService {
-  async fetch<T = any> (method: string, url: string, _opt: RequestInit = {}): Promise<T> {
+  async fetch<T = any>(method: string, url: string, _opt: RequestInit = {}): Promise<T> {
     // avoid mutation
     const opt = {
       method,
@@ -21,7 +21,7 @@ export class FetchService {
     const resp = await fetch(url, opt)
     if (!resp.ok) {
       const err = new Error(resp.statusText)
-      ; (err as any).response = resp
+      ;(err as any).response = resp
       return Promise.reject(err)
     }
 
@@ -29,19 +29,19 @@ export class FetchService {
   }
 
   // convenience methods
-  async get<T = any> (url: string, opt: RequestInit = {}): Promise<T> {
+  async get<T = any>(url: string, opt: RequestInit = {}): Promise<T> {
     return this.fetch<T>('get', url, opt)
   }
-  async post<T = any> (url: string, opt: RequestInit = {}): Promise<T> {
+  async post<T = any>(url: string, opt: RequestInit = {}): Promise<T> {
     return this.fetch<T>('post', url, opt)
   }
-  async put<T = any> (url: string, opt: RequestInit = {}): Promise<T> {
+  async put<T = any>(url: string, opt: RequestInit = {}): Promise<T> {
     return this.fetch<T>('put', url, opt)
   }
-  async patch<T = any> (url: string, opt: RequestInit = {}): Promise<T> {
+  async patch<T = any>(url: string, opt: RequestInit = {}): Promise<T> {
     return this.fetch<T>('patch', url, opt)
   }
-  async delete<T = any> (url: string, opt: RequestInit = {}): Promise<T> {
+  async delete<T = any>(url: string, opt: RequestInit = {}): Promise<T> {
     return this.fetch<T>('delete', url, opt)
   }
 }

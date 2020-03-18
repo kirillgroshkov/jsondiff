@@ -1,8 +1,8 @@
 import { fetchService } from '@src/srv/fetch.service'
 import { urlService } from '@src/srv/url.service'
-import { Component, Listen, Prop, State } from '@stencil/core'
+import { Component, h, State } from '@stencil/core'
 
-// var jsondiffpatch = require('jsondiffpatch').create(options);
+// const jsondiffpatch = require('jsondiffpatch').create()
 // import * as jsondiffpatchStatic from 'jsondiffpatch'
 // const jsondiffpatchStatic = require('jsondiffpatch/dist/jsondiffpatch.cjs.js') as any
 // const jsondiffpatch = jsondiffpatchStatic.create()
@@ -22,24 +22,24 @@ export class AppRoot {
 
   @State() visualDiff: string
 
-  async componentWillLoad (): Promise<void> {
+  async componentWillLoad(): Promise<void> {
     this.qs = urlService.parseQuery(location.search)
     this.url1 = this.qs.url1 || '/assets/ex1.json'
     this.url2 = this.qs.url2 || '/assets/ex2.json'
     this.full = !!this.qs.full
 
-    fetchService.get(this.url1).then(r => {
+    void fetchService.get(this.url1).then(r => {
       this.json1 = r
       this.updateDiff()
     })
 
-    fetchService.get(this.url2).then(r => {
+    void fetchService.get(this.url2).then(r => {
       this.json2 = r
       this.updateDiff()
     })
   }
 
-  private updateDiff (): void {
+  private updateDiff(): void {
     if (!this.json1 || !this.json2) return
 
     const jsondiffpatch = (window as any).jsondiffpatch
@@ -51,7 +51,7 @@ export class AppRoot {
     this.visualDiff = jsondiffpatch.formatters.html.format(delta, this.json1) || '<i>no changes</i>'
   }
 
-  render () {
+  render() {
     const loading1 = this.json1 ? '' : 'Loading url1...'
     const loading2 = this.json2 ? '' : 'Loading url2...'
 

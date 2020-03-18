@@ -1,18 +1,14 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "es2015",
-      "es2016",
-      "es2017"
-    ],
+    "lib": ["dom", "es2020"],
     "moduleResolution": "node",
-    "module": "es2015",
-    "target": "es2015",
+    "module": "esnext",
+    "target": "es2017",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "jsx": "react",
@@ -23,13 +19,6 @@
       "@src/*": ["src/*"]
     }
   },
-  "include": [
-    "src",
-    "types/jsx.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/scripts",
-    "scripts"
-  ]
+  "include": ["src", "types/jsx.d.ts"],
+  "exclude": ["node_modules", "src/scripts", "scripts"]
 }
